@@ -1,0 +1,291 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BB0000000000000000000001 /* AppMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000001 /* AppMain.swift */; };
+		BB0000000000000000000002 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000002 /* AppDelegate.swift */; };
+		BB0000000000000000000003 /* NotchOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000003 /* NotchOverlay.swift */; };
+		BB0000000000000000000004 /* GIFLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000004 /* GIFLoader.swift */; };
+		BB0000000000000000000005 /* GIFAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000005 /* GIFAnimationView.swift */; };
+		BB0000000000000000000006 /* BackgroundRemover.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000006 /* BackgroundRemover.swift */; };
+		BB0000000000000000000007 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000007 /* PersistenceManager.swift */; };
+		BB0000000000000000000008 /* DropZoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000008 /* DropZoneViewController.swift */; };
+		BB0000000000000000000009 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000000A /* Assets.xcassets */; };
+		BB000000000000000000000A /* default.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000000B /* default.gif */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AA000000000000000000000C /* NotchBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotchBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0000000000000000000001 /* AppMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMain.swift; sourceTree = "<group>"; };
+		AA0000000000000000000002 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AA0000000000000000000003 /* NotchOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchOverlay.swift; sourceTree = "<group>"; };
+		AA0000000000000000000004 /* GIFLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFLoader.swift; sourceTree = "<group>"; };
+		AA0000000000000000000005 /* GIFAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFAnimationView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000006 /* BackgroundRemover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundRemover.swift; sourceTree = "<group>"; };
+		AA0000000000000000000007 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		AA0000000000000000000008 /* DropZoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropZoneViewController.swift; sourceTree = "<group>"; };
+		AA0000000000000000000009 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA000000000000000000000A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AA000000000000000000000B /* default.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = default.gif; sourceTree = "<group>"; };
+		AA000000000000000000000D /* NotchBuddy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotchBuddy.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FF0000000000000000000002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CC0000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				CC0000000000000000000002 /* NotchBuddy */,
+				CC0000000000000000000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CC0000000000000000000002 /* NotchBuddy */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000001 /* AppMain.swift */,
+				AA0000000000000000000002 /* AppDelegate.swift */,
+				AA0000000000000000000003 /* NotchOverlay.swift */,
+				AA0000000000000000000004 /* GIFLoader.swift */,
+				AA0000000000000000000005 /* GIFAnimationView.swift */,
+				AA0000000000000000000006 /* BackgroundRemover.swift */,
+				AA0000000000000000000007 /* PersistenceManager.swift */,
+				AA0000000000000000000008 /* DropZoneViewController.swift */,
+				AA0000000000000000000009 /* Info.plist */,
+				AA000000000000000000000D /* NotchBuddy.entitlements */,
+				AA000000000000000000000A /* Assets.xcassets */,
+				AA000000000000000000000B /* default.gif */,
+			);
+			path = NotchBuddy;
+			sourceTree = "<group>";
+		};
+		CC0000000000000000000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA000000000000000000000C /* NotchBuddy.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DD0000000000000000000001 /* NotchBuddy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 220000000000000000000002 /* Build configuration list for PBXNativeTarget "NotchBuddy" */;
+			buildPhases = (
+				FF0000000000000000000001 /* Sources */,
+				FF0000000000000000000002 /* Frameworks */,
+				FF0000000000000000000003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NotchBuddy;
+			productName = NotchBuddy;
+			productReference = AA000000000000000000000C /* NotchBuddy.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EE0000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+			};
+			buildConfigurationList = 220000000000000000000001 /* Build configuration list for PBXProject "NotchBuddy" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CC0000000000000000000001;
+			productRefGroup = CC0000000000000000000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DD0000000000000000000001 /* NotchBuddy */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FF0000000000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB0000000000000000000009 /* Assets.xcassets in Resources */,
+				BB000000000000000000000A /* default.gif in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FF0000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB0000000000000000000001 /* AppMain.swift in Sources */,
+				BB0000000000000000000002 /* AppDelegate.swift in Sources */,
+				BB0000000000000000000003 /* NotchOverlay.swift in Sources */,
+				BB0000000000000000000004 /* GIFLoader.swift in Sources */,
+				BB0000000000000000000005 /* GIFAnimationView.swift in Sources */,
+				BB0000000000000000000006 /* BackgroundRemover.swift in Sources */,
+				BB0000000000000000000007 /* PersistenceManager.swift in Sources */,
+				BB0000000000000000000008 /* DropZoneViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		110000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		110000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		110000000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = NotchBuddy/NotchBuddy.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = NotchBuddy/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.notchbuddy.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		110000000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = NotchBuddy/NotchBuddy.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = NotchBuddy/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.notchbuddy.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		220000000000000000000001 /* Build configuration list for PBXProject "NotchBuddy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				110000000000000000000001 /* Debug */,
+				110000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		220000000000000000000002 /* Build configuration list for PBXNativeTarget "NotchBuddy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				110000000000000000000003 /* Debug */,
+				110000000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = EE0000000000000000000001 /* Project object */;
+}
