@@ -27,7 +27,7 @@ final class NotchOverlay {
         panel.backgroundColor = .clear
         panel.isOpaque = false
         panel.level = NSWindow.Level(rawValue: NSWindow.Level.statusBar.rawValue + 1)
-        panel.collectionBehavior = [.canJoinAllSpaces, .stationary, .ignoresCycle, .fullScreenAuxiliary]
+        panel.collectionBehavior = [.stationary, .ignoresCycle, .fullScreenAuxiliary]
         panel.isMovable = false
         panel.hasShadow = false
         panel.acceptsMouseMovedEvents = true
@@ -102,7 +102,7 @@ final class NotchOverlay {
         ep.backgroundColor = .clear
         ep.isOpaque = false
         ep.level = NSWindow.Level(rawValue: NSWindow.Level.statusBar.rawValue + 1)
-        ep.collectionBehavior = [.canJoinAllSpaces, .stationary, .ignoresCycle, .fullScreenAuxiliary]
+        ep.collectionBehavior = [.stationary, .ignoresCycle, .fullScreenAuxiliary]
         ep.hasShadow = false
 
         let eav = GIFAnimationView(frame: NSRect(origin: .zero, size: NSSize(width: w, height: h)))
