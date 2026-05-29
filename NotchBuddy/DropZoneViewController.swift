@@ -1,9 +1,13 @@
 import AppKit
 import UniformTypeIdentifiers
 
+private let supportedExtensions = Set(["gif", "jpeg", "jpg", "png"])
+
 final class DropZoneViewController: NSViewController {
     private let onSelected: (URL) -> Void
     private let dropView = GIFDropView()
+    private let errorLabel = NSTextField(labelWithString: "")
+    private var errorHideTimer: Timer?
 
     init(onSelected: @escaping (URL) -> Void) {
         self.onSelected = onSelected
@@ -21,14 +25,22 @@ final class DropZoneViewController: NSViewController {
 
         dropView.translatesAutoresizingMaskIntoConstraints = false
         dropView.onDrop = { [weak self] url in self?.onSelected(url) }
+        dropView.onUnsupportedFile = { [weak self] in self?.showError() }
         view.addSubview(dropView)
 
-        let label = NSTextField(labelWithString: "GIF을 여기에 드래그하세요 🐾")
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.alignment = .center
-        label.font = .systemFont(ofSize: 12)
-        label.textColor = .secondaryLabelColor
-        dropView.addSubview(label)
+        let hintLabel = NSTextField(labelWithString: "GIF · JPG · PNG 드래그하세요 🐾")
+        hintLabel.translatesAutoresizingMaskIntoConstraints = false
+        hintLabel.alignment = .center
+        hintLabel.font = .systemFont(ofSize: 12)
+        hintLabel.textColor = .secondaryLabelColor
+        dropView.addSubview(hintLabel)
+
+        errorLabel.translatesAutoresizingMaskIntoConstraints = false
+        errorLabel.alignment = .center
+        errorLabel.font = .systemFont(ofSize: 11, weight: .medium)
+        errorLabel.textColor = .systemRed
+        errorLabel.isHidden = true
+        view.addSubview(errorLabel)
 
         let orLabel = NSTextField(labelWithString: "또는")
         orLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -47,18 +59,29 @@ final class DropZoneViewController: NSViewController {
             dropView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
             dropView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
             dropView.heightAnchor.constraint(equalToConstant: 90),
-            label.centerXAnchor.constraint(equalTo: dropView.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: dropView.centerYAnchor),
-            orLabel.topAnchor.constraint(equalTo: dropView.bottomAnchor, constant: 8),
+            hintLabel.centerXAnchor.constraint(equalTo: dropView.centerXAnchor),
+            hintLabel.centerYAnchor.constraint(equalTo: dropView.centerYAnchor),
+            errorLabel.topAnchor.constraint(equalTo: dropView.bottomAnchor, constant: 6),
+            errorLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            orLabel.topAnchor.constraint(equalTo: errorLabel.bottomAnchor, constant: 2),
             orLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             btn.topAnchor.constraint(equalTo: orLabel.bottomAnchor, constant: 6),
             btn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
 
+    private func showError() {
+        errorHideTimer?.invalidate()
+        errorLabel.stringValue = "GIF · JPG · PNG 파일만 지원합니다"
+        errorLabel.isHidden = false
+        errorHideTimer = Timer.scheduledTimer(withTimeInterval: 2.5, repeats: false) { [weak self] _ in
+            self?.errorLabel.isHidden = true
+        }
+    }
+
     @objc private func browse() {
         let panel = NSOpenPanel()
-        panel.allowedContentTypes = [.gif]
+        panel.allowedContentTypes = [.gif, .jpeg, .png]
         panel.canChooseFiles = true
         panel.canChooseDirectories = false
         if panel.runModal() == .OK, let url = panel.url {
@@ -69,7 +92,10 @@ final class DropZoneViewController: NSViewController {
 
 final class GIFDropView: NSView {
     var onDrop: ((URL) -> Void)?
-    private var highlighted = false { didSet { needsDisplay = true } }
+    var onUnsupportedFile: (() -> Void)?
+
+    private enum HighlightState { case none, valid, invalid }
+    private var highlightState: HighlightState = .none { didSet { needsDisplay = true } }
 
     override init(frame: NSRect) {
         super.init(frame: frame)
@@ -79,10 +105,21 @@ final class GIFDropView: NSView {
     required init?(coder: NSCoder) { fatalError() }
 
     override func draw(_ dirtyRect: NSRect) {
-        let bg: NSColor = highlighted ? .controlAccentColor.withAlphaComponent(0.15) : .quaternaryLabelColor.withAlphaComponent(0.08)
+        let bg: NSColor
+        let border: NSColor
+        switch highlightState {
+        case .none:
+            bg = .quaternaryLabelColor.withAlphaComponent(0.08)
+            border = .tertiaryLabelColor
+        case .valid:
+            bg = .controlAccentColor.withAlphaComponent(0.15)
+            border = .controlAccentColor
+        case .invalid:
+            bg = .systemRed.withAlphaComponent(0.1)
+            border = .systemRed
+        }
         bg.setFill()
         NSBezierPath(roundedRect: bounds, xRadius: 8, yRadius: 8).fill()
-        let border: NSColor = highlighted ? .controlAccentColor : .tertiaryLabelColor
         border.setStroke()
         let path = NSBezierPath(roundedRect: bounds.insetBy(dx: 1, dy: 1), xRadius: 7, yRadius: 7)
         path.lineWidth = 1.5
@@ -91,24 +128,29 @@ final class GIFDropView: NSView {
     }
 
     override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
-        guard gifURL(from: sender) != nil else { return [] }
-        highlighted = true
+        guard let url = fileURL(from: sender) else { return [] }
+        if supportedExtensions.contains(url.pathExtension.lowercased()) {
+            highlightState = .valid
+        } else {
+            highlightState = .invalid
+        }
         return .copy
     }
 
-    override func draggingExited(_ sender: NSDraggingInfo?) { highlighted = false }
+    override func draggingExited(_ sender: NSDraggingInfo?) { highlightState = .none }
 
     override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
-        highlighted = false
-        guard let url = gifURL(from: sender) else { return false }
-        onDrop?(url)
+        highlightState = .none
+        guard let url = fileURL(from: sender) else { return false }
+        if supportedExtensions.contains(url.pathExtension.lowercased()) {
+            onDrop?(url)
+        } else {
+            onUnsupportedFile?()
+        }
         return true
     }
 
-    private func gifURL(from info: NSDraggingInfo) -> URL? {
-        guard let urls = info.draggingPasteboard.readObjects(forClasses: [NSURL.self], options: [.urlReadingFileURLsOnly: true]) as? [URL],
-              let url = urls.first,
-              url.pathExtension.lowercased() == "gif" else { return nil }
-        return url
+    private func fileURL(from info: NSDraggingInfo) -> URL? {
+        (info.draggingPasteboard.readObjects(forClasses: [NSURL.self], options: [.urlReadingFileURLsOnly: true]) as? [URL])?.first
     }
 }
