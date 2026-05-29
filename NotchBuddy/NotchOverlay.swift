@@ -172,7 +172,11 @@ final class NotchOverlay {
     }
 
     private func defaultX(screen: NSScreen) -> CGFloat {
-        screen.frame.midX + 160 + 16
+        // 노치 왼쪽 끝(midX - 82pt)에서 1cm(≈28pt) 왼쪽, 패널 너비(60pt) 만큼 앞
+        let notchHalfWidth: CGFloat = 82
+        let gap: CGFloat = 28
+        let initialPanelWidth: CGFloat = 60
+        return screen.frame.midX - notchHalfWidth - gap - initialPanelWidth
     }
 }
 
