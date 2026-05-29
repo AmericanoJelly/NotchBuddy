@@ -43,19 +43,18 @@ final class GIFAnimationView: NSView {
 
     // MARK: - Mouse Events
 
-    private var mouseDownLocation: NSPoint = .zero
+    private var didDrag = false
 
     override func mouseDown(with event: NSEvent) {
-        mouseDownLocation = event.locationInWindow
+        didDrag = false
     }
 
     override func mouseUp(with event: NSEvent) {
-        let loc = event.locationInWindow
-        let dist = hypot(loc.x - mouseDownLocation.x, loc.y - mouseDownLocation.y)
-        if dist < 5 { onTap?() }
+        if !didDrag { onTap?() }
     }
 
     override func mouseDragged(with event: NSEvent) {
+        didDrag = true
         onDrag?(event.deltaX)
     }
 
