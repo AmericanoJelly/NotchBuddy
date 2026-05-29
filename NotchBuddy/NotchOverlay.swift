@@ -1,4 +1,5 @@
 import AppKit
+import CoreGraphics
 
 final class NotchOverlay {
     private var panel: NSPanel!
@@ -13,7 +14,7 @@ final class NotchOverlay {
     init() { setup() }
 
     private func setup() {
-        guard let screen = NSScreen.main else { return }
+        guard let screen = builtinScreen() else { return }
         let h = menuBarHeight(screen: screen)
         let x = PersistenceManager.shared.savedXPosition ?? defaultX(screen: screen)
         let frame = NSRect(x: x, y: screen.frame.maxY - h, width: 60, height: h)
@@ -27,7 +28,7 @@ final class NotchOverlay {
         panel.backgroundColor = .clear
         panel.isOpaque = false
         panel.level = NSWindow.Level(rawValue: NSWindow.Level.statusBar.rawValue + 1)
-        panel.collectionBehavior = [.stationary, .ignoresCycle, .fullScreenAuxiliary]
+        panel.collectionBehavior = [.canJoinAllSpaces, .stationary, .ignoresCycle, .fullScreenAuxiliary]
         panel.isMovable = false
         panel.hasShadow = false
         panel.acceptsMouseMovedEvents = true
@@ -81,7 +82,7 @@ final class NotchOverlay {
     }
 
     private func showExpanded() {
-        guard let screen = NSScreen.main, !frames.isEmpty else { return }
+        guard let screen = builtinScreen(), !frames.isEmpty else { return }
         isExpanded = true
         animationView.isHidden = true
 
@@ -102,7 +103,7 @@ final class NotchOverlay {
         ep.backgroundColor = .clear
         ep.isOpaque = false
         ep.level = NSWindow.Level(rawValue: NSWindow.Level.statusBar.rawValue + 1)
-        ep.collectionBehavior = [.stationary, .ignoresCycle, .fullScreenAuxiliary]
+        ep.collectionBehavior = [.canJoinAllSpaces, .stationary, .ignoresCycle, .fullScreenAuxiliary]
         ep.hasShadow = false
 
         let eav = GIFAnimationView(frame: NSRect(origin: .zero, size: NSSize(width: w, height: h)))
@@ -135,7 +136,7 @@ final class NotchOverlay {
     // MARK: - Layout
 
     private func resize(for frames: [GIFFrame]) {
-        guard let screen = NSScreen.main, let first = frames.first else { return }
+        guard let screen = builtinScreen(), let first = frames.first else { return }
         let maxH = menuBarHeight(screen: screen)
         let ratio = first.image.size.width / max(first.image.size.height, 1)
         let h = min(first.image.size.height, maxH)
@@ -149,11 +150,18 @@ final class NotchOverlay {
     }
 
     private func handleDrag(_ deltaX: CGFloat) {
-        guard let screen = NSScreen.main else { return }
+        guard let screen = builtinScreen() else { return }
         var origin = panel.frame.origin
         origin.x = (origin.x + deltaX).clamped(to: 0...(screen.frame.width - panel.frame.width))
         panel.setFrameOrigin(origin)
         PersistenceManager.shared.saveXPosition(origin.x)
+    }
+
+    private func builtinScreen() -> NSScreen? {
+        NSScreen.screens.first {
+            guard let id = $0.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID else { return false }
+            return CGDisplayIsBuiltin(id) != 0
+        } ?? NSScreen.main
     }
 
     private func menuBarHeight(screen: NSScreen) -> CGFloat {
