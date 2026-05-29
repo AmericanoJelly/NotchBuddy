@@ -15,7 +15,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func setupStatusItem() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        statusItem.button?.image = NSImage(systemSymbolName: "sparkles", accessibilityDescription: "NotchBuddy")
+        statusItem.button?.image = NSImage(systemSymbolName: "pawprint.fill", accessibilityDescription: "NotchBuddy")
 
         let menu = NSMenu()
         let changeItem = NSMenuItem(title: "캐릭터 변경", action: #selector(changeCharacter), keyEquivalent: "")
