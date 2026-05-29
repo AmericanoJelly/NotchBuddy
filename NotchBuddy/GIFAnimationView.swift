@@ -2,6 +2,7 @@ import AppKit
 
 final class GIFAnimationView: NSView {
     var onDrag: ((CGFloat) -> Void)?
+    var onTap: (() -> Void)?
 
     private var frames: [GIFFrame] = []
     private var currentIndex = 0
@@ -40,9 +41,19 @@ final class GIFAnimationView: NSView {
         frames[currentIndex].image.draw(in: bounds)
     }
 
-    // MARK: - Drag to reposition (X axis only)
+    // MARK: - Mouse Events
 
-    override func mouseDown(with event: NSEvent) {}
+    private var mouseDownLocation: NSPoint = .zero
+
+    override func mouseDown(with event: NSEvent) {
+        mouseDownLocation = event.locationInWindow
+    }
+
+    override func mouseUp(with event: NSEvent) {
+        let loc = event.locationInWindow
+        let dist = hypot(loc.x - mouseDownLocation.x, loc.y - mouseDownLocation.y)
+        if dist < 5 { onTap?() }
+    }
 
     override func mouseDragged(with event: NSEvent) {
         onDrag?(event.deltaX)
